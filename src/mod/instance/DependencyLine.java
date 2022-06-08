@@ -32,6 +32,7 @@ public class DependencyLine extends JPanel implements IFuncComponent, ILinePaint
 	CanvasPanelHandler cph;
 	private static final int arrowLen = 15;
 	private static final int arrowDegree = 25;
+	public boolean isPortSelected=false;
 
 	public DependencyLine(CanvasPanelHandler cph) {
 		this.setOpaque(false);
@@ -40,14 +41,53 @@ public class DependencyLine extends JPanel implements IFuncComponent, ILinePaint
 		this.cph = cph;
 	}
 
+	public JPanel getFrom() {
+		return from;
+	}
+
+	public void setFrom(JPanel from) {
+		this.from = from;
+	}
+
+	public int getFromSide() {
+		return fromSide;
+	}
+
+	public void setFromSide(int fromSide) {
+		this.fromSide = fromSide;
+	}
+
+	public JPanel getTo() {
+		return to;
+	}
+
+	public void setTo(JPanel to) {
+		this.to = to;
+	}
+
+	public int getToSide() {
+		return toSide;
+	}
+
+	public void setToSide(int toSide) {
+		this.toSide = toSide;
+	}
+
 	@Override
 	public void paintComponent(Graphics g) {
 		Point fpPrime;
 		Point tpPrime;
 		renewConnect();
+		//System.out.println(isPortSelected+"DL color");
+		if (isPortSelected) {
+			g.setColor(Color.green);
+		}
+		else {
+			g.setColor(Color.BLACK);
+		}
 		fpPrime = new Point(fp.x - this.getLocation().x, fp.y - this.getLocation().y);
 		tpPrime = new Point(tp.x - this.getLocation().x, tp.y - this.getLocation().y);
-		g.setColor(Color.BLACK);
+		//g.setColor(Color.BLACK);
 		Graphics2D g2d = (Graphics2D) g.create();
 		Stroke dashed = new BasicStroke(3, BasicStroke.CAP_BUTT, BasicStroke.JOIN_BEVEL, 0, new float[] { 9 }, 0);
 		g2d.setStroke(dashed);
